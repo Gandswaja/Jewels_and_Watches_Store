@@ -1,19 +1,55 @@
 import React from "react";
+import Axios from "axios";
 import {
     FormControl,
     InputGroup,
-    Button
+    Button,
+    Modal
 
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 class LoginPage extends React.Component{
+    // Membuat tampilan 'password'
     constructor(props){
         super(props)
         this.state={
-            visibility: false
+            visibility: false,
+            error: false,
+            errorLogin: false
         }
     }
+
+    // function untuk login {di tempelkan pada buttom login}
+    onLogin = () => {
+        // ambil data dari input password dan username
+        let username = this.refs.username.value
+        let password = this.refs.password.value
+        // console.log(username, password)
+
+        // kalau ada input yang masih kosong, natofi data tidak boleh kosong
+        if (!username || !password){
+            return this.setState({error: true})
+        }
+        
+        // cek apakah data yang dikirim oleh user sudah ada di daftar users di database
+        Axios.get(`http://localhost:2000/users?username=${username}&password=${password}`)
+            .then(res => {
+                console.log(res.data)
+                if(res.data.length===0){
+                    // kalau tidak ada kasih info
+                    return this.setState({errorLogin: true})
+                }
+                // kalau berhasil, data user dikirim ke userReducers
+                alert('Selamat Anda berhasil Login')
+            })
+
+        // kalau ada langsung menuju halaman utama (landing page)
+        
+
+    }
+
+
     render(){
         const {visibility} = this.setState
         return(
@@ -24,28 +60,56 @@ class LoginPage extends React.Component{
                     <label>Username</label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon1">
-                            <i class="fad fa-user"></i>
+                            <i className="fad fa-user"></i>
                         </InputGroup.Text>
                         <FormControl
                             placeholder="Input Here"
-                            />
+                            ref="username"
+                            /> 
+
                     </InputGroup>
                     <label>Password</label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon1" onClick={() => this.setState({visibility : !visibility})}>
-                        {visibility ? <i class="far fa-eye"></i> : <i class="far fa-eye-slash"></i>}
-                            
+                        {visibility ? <i className="far fa-eye"></i> : <i className="far fa-eye-slash"></i>}
                         </InputGroup.Text>
                         <FormControl
                             placeholder="Input Here"
                             type={visibility ? "text":"password"}
+                            ref="password"
                             />
                     </InputGroup>
                     <div style={styles.contButton}>
-                        <Button variant="primary" style={styles.button}>Login</Button>
+                        <Button onClick={this.onLogin} variant="primary" style={styles.button}>Login</Button>
                     </div>
                     <p style={styles.goToRegis}>Do You Have an Acount? <Link style={{color: 'navy', fontWeight: 'bold'}} to="/register" >Register</Link></p>
                 </div>
+                <Modal show={this.state.error}>
+                    <Modal.Header>
+                        <Modal.Title>Error</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <p>Please input all of data!!</p>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button onClick={()=> this.setState({error: false})} variant="secondary">OK</Button>                   
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={this.state.errorLogin}>
+                    <Modal.Header>
+                        <Modal.Title>Error</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <p>This account is doesn't exist!</p>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button onClick={() => this.setState({ errorLogin: false })} variant="secondary">OK</Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         )
     }

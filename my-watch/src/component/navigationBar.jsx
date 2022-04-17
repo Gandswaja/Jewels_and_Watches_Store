@@ -22,7 +22,7 @@ class NavigationBar extends React.Component {
                         <Nav.Link href="#home" style={styles.navlink}>Product</Nav.Link>
                         <Nav.Link href="#home" style={styles.navlink}>Contact Us</Nav.Link>
                     </Nav>
-                    <Button variant="outline-light" ><i class="fas fa-shopping-cart"></i></Button>
+                    <Button variant="outline-light" ><i className="fas fa-shopping-cart"></i></Button>
                     <Dropdown style={{ marginLeft: '10px' }}>
                         <Dropdown.Toggle style={styles.button} id="dropdown-basic">
                             Username
