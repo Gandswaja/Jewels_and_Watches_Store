@@ -1,13 +1,13 @@
 import React from "react";
-import Axios from "axios";
 import {
     FormControl,
     InputGroup,
     Button,
     Modal
-
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { login, errLoginFalse } from '../redux/actions'
 
 class LoginPage extends React.Component{
     // Membuat tampilan 'password'
@@ -15,8 +15,7 @@ class LoginPage extends React.Component{
         super(props)
         this.state={
             visibility: false,
-            error: false,
-            errorLogin: false
+            error: false, 
         }
     }
 
@@ -33,24 +32,14 @@ class LoginPage extends React.Component{
         }
         
         // cek apakah data yang dikirim oleh user sudah ada di daftar users di database
-        Axios.get(`http://localhost:2000/users?username=${username}&password=${password}`)
-            .then(res => {
-                console.log(res.data)
-                if(res.data.length===0){
-                    // kalau tidak ada kasih info
-                    return this.setState({errorLogin: true})
-                }
-                // kalau berhasil, data user dikirim ke userReducers
-                alert('Selamat Anda berhasil Login')
-            })
+        this.props.login(username, password)
 
         // kalau ada langsung menuju halaman utama (landing page)
         
-
     }
 
-
     render(){
+        console.log(this.props.dataUser)
         const {visibility} = this.setState
         return(
             <div style={styles.cont} >
@@ -97,7 +86,7 @@ class LoginPage extends React.Component{
                         <Button onClick={()=> this.setState({error: false})} variant="secondary">OK</Button>                   
                     </Modal.Footer>
                 </Modal>
-                <Modal show={this.state.errorLogin}>
+                <Modal show={this.props.errorLogin}>
                     <Modal.Header>
                         <Modal.Title>Error</Modal.Title>
                     </Modal.Header>
@@ -107,7 +96,7 @@ class LoginPage extends React.Component{
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button onClick={() => this.setState({ errorLogin: false })} variant="secondary">OK</Button>
+                        <Button onClick={this.props.errLoginFalse} variant="secondary">OK</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
@@ -153,4 +142,11 @@ const styles ={
     }
 }
 
-export default LoginPage
+const mapStateToProps = (state) => {
+    return {
+        errorLogin: state.userReducer.errorLogin,
+        dataUser: state.userReducer
+    }
+}
+
+export default connect(mapStateToProps, { login, errLoginFalse })(LoginPage)
