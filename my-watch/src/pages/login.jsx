@@ -5,7 +5,7 @@ import {
     Button,
     Modal
 } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login, errLoginFalse } from '../redux/actions'
 
@@ -32,14 +32,16 @@ class LoginPage extends React.Component{
         }
         
         // cek apakah data yang dikirim oleh user sudah ada di daftar users di database
-        this.props.login(username, password)
-
-        // kalau ada langsung menuju halaman utama (landing page)
-        
+        this.props.login(username, password)             
     }
 
     render(){
-        console.log(this.props.dataUser)
+        // kalau ada langsung menuju halaman utama atau (landing page)
+         if(this.props.username){
+             return <Navigate to="/" />
+         }
+
+        console.log(this.props.username)
         const {visibility} = this.setState
         return(
             <div style={styles.cont} >
@@ -145,7 +147,7 @@ const styles ={
 const mapStateToProps = (state) => {
     return {
         errorLogin: state.userReducer.errorLogin,
-        dataUser: state.userReducer
+        username: state.userReducer.username
     }
 }
 

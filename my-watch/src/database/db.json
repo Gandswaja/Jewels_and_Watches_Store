@@ -262,9 +262,9 @@
         },
         {
             "id": 2,
-            "username": "user",
-            "password": "user123",
-            "email": "user@gmail.com",
+            "username": "Sutrisno",
+            "password": "Sutrisno123",
+            "email": "trisno@gmail.com",
             "role": "user"
 
         }
