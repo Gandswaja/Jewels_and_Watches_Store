@@ -12,11 +12,11 @@ import ReduxThunk from 'redux-thunk'
 
 const globalState = createStore(allReducer, applyMiddleware(ReduxThunk))
 
-ReactDOM.render( 
-  <Provider store={globalState}> 
+ReactDOM.render(
+  <Provider store={globalState}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>,
-    document.getElementById('root')
+  document.getElementById('root')
 )

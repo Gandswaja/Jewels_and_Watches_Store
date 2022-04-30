@@ -15,22 +15,21 @@ import RegisPage from './pages/register';
 // import action
 import { keepLogin } from "./redux/actions"
 class App extends React.Component {
-  componentDidMount(){
-    let id = localStorage.getItem('idUser')
-    this.props.keepLogin(id)
-  }
+    componentDidMount() {
+        let id = localStorage.getItem('idUser')
+        this.props.keepLogin(id)
+    }
     render() {
         return ( 
           <div>
-            <NavigationBar />
-            <Routes >
-              <Route path = '/' element = { <HomePage /> }> </Route> 
-              <Route path = '/login' element = { <LoginPage />}> </Route> 
-              <Route path = '/register' element = {<RegisPage />}> </Route> 
+            <Routes>
+              <Route path = '/' element = { <HomePage /> } ></Route> 
+              <Route path = '/Login' element = { < LoginPage /> } ></Route> 
+              <Route path = '/Register' element = { < RegisPage /> }></Route> 
             </Routes> 
           </div>
         );
     }
 }
 
-export default connect (null, {keepLogin}) (App);
+export default connect(null, { keepLogin })(App);

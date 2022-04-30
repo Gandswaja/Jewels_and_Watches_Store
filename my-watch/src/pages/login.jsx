@@ -9,13 +9,13 @@ import { Link, Navigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login, errLoginFalse } from '../redux/actions'
 
-class LoginPage extends React.Component{
+class LoginPage extends React.Component {
     // Membuat tampilan 'password'
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             visibility: false,
-            error: false, 
+            error: false,
         }
     }
 
@@ -27,23 +27,23 @@ class LoginPage extends React.Component{
         // console.log(username, password)
 
         // kalau ada input yang masih kosong, natofi data tidak boleh kosong
-        if (!username || !password){
-            return this.setState({error: true})
+        if (!username || !password) {
+            return this.setState({ error: true })
         }
-        
+
         // cek apakah data yang dikirim oleh user sudah ada di daftar users di database
-        this.props.login(username, password)             
+        this.props.login(username, password)
     }
 
-    render(){
+    render() {
         // kalau ada langsung menuju halaman utama atau (landing page)
-         if(this.props.username){
-             return <Navigate to="/" />
-         }
+        if (this.props.username) {
+            return <Navigate to="/" />
+        }
 
         console.log(this.props.username)
-        const {visibility} = this.setState
-        return(
+        const { visibility } = this.setState
+        return (
             <div style={styles.cont} >
                 <div style={styles.contForm} >
                     <h1>Hello,</h1>
@@ -56,24 +56,24 @@ class LoginPage extends React.Component{
                         <FormControl
                             placeholder="Input Here"
                             ref="username"
-                            /> 
+                        />
 
                     </InputGroup>
                     <label>Password</label>
                     <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1" onClick={() => this.setState({visibility : !visibility})}>
-                        {visibility ? <i className="far fa-eye"></i> : <i className="far fa-eye-slash"></i>}
+                        <InputGroup.Text id="basic-addon1" onClick={() => this.setState({ visibility: !visibility })}>
+                            {visibility ? <i className="far fa-eye"></i> : <i className="far fa-eye-slash"></i>}
                         </InputGroup.Text>
                         <FormControl
                             placeholder="Input Here"
-                            type={visibility ? "text":"password"}
+                            type={visibility ? "text" : "password"}
                             ref="password"
-                            />
+                        />
                     </InputGroup>
                     <div style={styles.contButton}>
                         <Button onClick={this.onLogin} variant="primary" style={styles.button}>Login</Button>
                     </div>
-                    <p style={styles.goToRegis}>Do You Have an Acount? <Link style={{color: 'navy', fontWeight: 'bold'}} to="/register" >Register</Link></p>
+                    <p style={styles.goToRegis}>Do You Have an Acount? <Link style={{ color: 'navy', fontWeight: 'bold' }} to="/register" >Register</Link></p>
                 </div>
                 <Modal show={this.state.error}>
                     <Modal.Header>
@@ -85,7 +85,7 @@ class LoginPage extends React.Component{
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button onClick={()=> this.setState({error: false})} variant="secondary">OK</Button>                   
+                        <Button onClick={() => this.setState({ error: false })} variant="secondary">OK</Button>
                     </Modal.Footer>
                 </Modal>
                 <Modal show={this.props.errorLogin}>
@@ -106,8 +106,8 @@ class LoginPage extends React.Component{
     }
 }
 
-const styles ={
-    cont:{
+const styles = {
+    cont: {
         backgroundImage: 'url(https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=799&q=80)',
         backgroundSize: 'cover',
         height: '100vh',
@@ -124,21 +124,21 @@ const styles ={
         padding: '2%'
 
     },
-    contButton:{
+    contButton: {
         display: 'flex',
         justifyContent: 'center',
         marginBottom: '10px',
         padding: '1%'
     },
 
-    button:{
+    button: {
         backgroundColor: '#00675b',
         border: 'none',
         color: 'white',
         margin: 'auto'
     },
 
-    goToRegis:{
+    goToRegis: {
         fontWeight: 'bold',
         textAlign: 'center'
     }

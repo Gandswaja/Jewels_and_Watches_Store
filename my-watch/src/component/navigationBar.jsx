@@ -7,7 +7,7 @@ import {
     Image
 } from 'react-bootstrap'
 import { LOGO } from '../asset'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../redux/actions'
 
