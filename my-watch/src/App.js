@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import RegisPage from './pages/register';
+import DetailPage from './pages/detail.jsx'
 
 // import action
 import { keepLogin } from "./redux/actions"
@@ -25,7 +26,8 @@ class App extends React.Component {
             <Routes>
               <Route path = '/' element = { <HomePage /> } ></Route> 
               <Route path = '/Login' element = { < LoginPage /> } ></Route> 
-              <Route path = '/Register' element = { < RegisPage /> }></Route> 
+              <Route path = '/Register' element = { < RegisPage /> }></Route>
+              <Route path='/Detail' element={< DetailPage />}></Route> 
             </Routes> 
           </div>
         );

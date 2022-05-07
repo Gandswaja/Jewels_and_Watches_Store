@@ -110,7 +110,50 @@
             "images": [
                 "https://images.unsplash.com/photo-1605101232508-283d0cd4909e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
             ]
+        },
+        {
+            "id": 9,
+            "name": "Watch_9",
+            "category": "",
+            "brand": "Rolex",
+            "rating": [],
+            "colour": "",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus similique optio delectus dolores corrupti, nostrum dolore harum possimus ipsam accusamus architecto culpa tenetur illum error sed dolorum? Libero, voluptas harum?",
+            "price": 50000000,
+            "stock": 12,
+            "images": [
+                "https://images.unsplash.com/photo-1605101232508-283d0cd4909e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            ]
+        },
+        {
+            "id": 10,
+            "name": "Watch_10",
+            "category": "",
+            "brand": "Rolex",
+            "rating": [],
+            "colour": "",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus similique optio delectus dolores corrupti, nostrum dolore harum possimus ipsam accusamus architecto culpa tenetur illum error sed dolorum? Libero, voluptas harum?",
+            "price": 50000000,
+            "stock": 12,
+            "images": [
+                "https://images.unsplash.com/photo-1605101232508-283d0cd4909e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            ]
+        },
+        {
+            "id": 11,
+            "name": "Watch_11",
+            "category": "",
+            "brand": "Rolex",
+            "rating": [],
+            "colour": "",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus similique optio delectus dolores corrupti, nostrum dolore harum possimus ipsam accusamus architecto culpa tenetur illum error sed dolorum? Libero, voluptas harum?",
+            "price": 50000000,
+            "stock": 12,
+            "images": [
+                "https://images.unsplash.com/photo-1605101232508-283d0cd4909e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            ]
         }
+
     ],
     "slider": [{
             "image": "https://images.unsplash.com/photo-1508962914676-134849a727f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",

@@ -5,6 +5,7 @@ import {
     Card,
     Button
 } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import NavigationBar from '../component/navigationBar'
 
 class HomePage extends React.Component {
@@ -60,12 +61,14 @@ class HomePage extends React.Component {
                                     <Card style={{ width: '18rem', marginBottom: '15px', marginTop: '15px' }}>
                                         <Card.Img style={styles.cardImg} variant="top" src={item.images[0]} />
                                         <Card.Body style={styles.cardBody}>
-                                            <Card.Title style={styles.cardTitle}>{item.brand}  - {item.name} </Card.Title>
-                                            <Card.Text><strong>IDR {item.price.toLocaleString()}</strong></Card.Text>
+                                            <Card.Title style={styles.cardTitle}>{item.name}</Card.Title>
+                                            <Card.Text><strong>IDR {item.price.toLocaleString()},00</strong></Card.Text>
                                             <div style={styles.contButton}>
-                                                <Button variant="outline-light"><i class="far fa-bookmark"></i></Button>
                                                 <Button variant="outline-light">
-                                                    <i class="fas fa-cart-plus"></i> Buy Now
+                                                    <i className="far fa-bookmark"></i>
+                                                </Button>
+                                                <Button variant="outline-light" as={Link} to={`/detail?${item.id}`}>
+                                                    <i className="fas fa-cart-plus"></i> Buy Now
                                                 </Button>
                                             </div>
                                         </Card.Body>
