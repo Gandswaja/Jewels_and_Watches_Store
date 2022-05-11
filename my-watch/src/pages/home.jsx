@@ -29,8 +29,7 @@ class HomePage extends React.Component {
     }
 
     render() {
-        console.log(this.state.carousels)
-        console.log(this.state.products)
+        
         return (
             <div style={{ backgroundColor: '#A3DDCB', }}>
                 <NavigationBar />
