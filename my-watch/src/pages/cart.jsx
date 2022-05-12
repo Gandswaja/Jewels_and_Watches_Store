@@ -64,7 +64,7 @@ class CartPage extends React.Component {
                                 </td>
                                 <td>IDR {(item.price * item.qty).toLocaleString()},00</td>
                                 <td>
-                                    <Button variant="success" className="mr-2" onClick={() => this.onSave(index)}>Save</Button>
+                                    <Button variant="success" className="mr-2 mx-3" onClick={() => this.onSave(index)}>Save</Button>
                                     <Button variant="danger" onClick={() => this.setState({ indexEdit: null })}>Cancel</Button>
                                 </td>
                             </tr>
@@ -79,7 +79,7 @@ class CartPage extends React.Component {
                             <td>{item.qty}</td>
                             <td>IDR {(item.price * item.qty).toLocaleString()},00</td>
                             <td>
-                                <Button variant="warning" onClick={() => this.onEdit(index)} className="mr-2">Edit</Button>
+                                <Button variant="warning" onClick={() => this.onEdit(index)} className="mr-2 mx-3">Edit</Button>
                                 <Button variant="danger" onClick={() => this.onDelete(index)}>Delete</Button>
                             </td>
                         </tr>
@@ -159,7 +159,8 @@ const mapStateToProps = (state) => {
     return {
         username: state.userReducer.username,
         cart: state.userReducer.cart,
-        id: state.userReducer.id
+        id: state.userReducer.id,
+        
     }
 }
 

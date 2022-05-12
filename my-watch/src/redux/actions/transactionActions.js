@@ -27,7 +27,7 @@ export const delCart = (idUser, idProdCart) => {
     return (dispatch) => {
         Axios.get(`http://localhost:2000/users/${idUser}`)
             .then(res => {
-                let tempCart = res.data.cart
+                let tempCart = res.data.cart // cart lama
                 tempCart.splice(idProdCart, 1)
 
                 Axios.patch(`http://localhost:2000/users/${idUser}`, { cart: tempCart })
@@ -49,20 +49,20 @@ export const saveCart = (idUser, idProdCart, qtyUpdate) => {
         Axios.get(`http://localhost:2000/users/${idUser}`)
             .then(res => {
                 // tempCart untuk menampung data cart yg sekarang
-                let tempCart = res.data.cart
+                let tempCart = res.data.cart // cart lama di json
 
                 // tempProd untuk menampung data product yang mau kita update qty nya
-                let tempProd = res.data.cart[idProdCart]
+                let tempProd = res.data.cart[idProdCart] // cart terbaru 
                 console.log(tempProd)
 
                 // update qty prod yang lama dengan qty yang baru
                 tempProd.qty = qtyUpdate
 
                 // kita ganti data cart dengan data product yang sudah kita edit
-                tempCart.splice(idProdCart, 1, tempProd)
+                tempCart.splice(idProdCart, 1, tempProd) // (mulai index ke berapa, jumlah yg di hapus, data pengganti)
 
                 // kita patch data cart di user dengan yang terbaru
-                Axios.patch(`http://localhost:2000/users/${idUser}`, { cart: tempCart })
+                Axios.patch(`http://localhost:2000/users/${idUser}`, { cart: tempCart }) // *Note 'idUser' = params , {} = body
                     .then(res => {
                         // karena data base sudah terupdate maka kita perlu menyesuaikan data update di database
                         // dengan yang ada di redux

@@ -4,7 +4,8 @@ import {
     Nav,
     Dropdown,
     Button,
-    Image
+    Image,
+    Badge
 } from 'react-bootstrap'
 import { LOGO } from '../asset'
 import { Link } from 'react-router-dom'
@@ -25,7 +26,7 @@ class NavigationBar extends React.Component {
                         <Nav.Link href="#home" style={styles.navlink}>Product</Nav.Link>
                         <Nav.Link href="#home" style={styles.navlink}>Contact Us</Nav.Link>
                     </Nav>
-                    <Button variant="outline-light" ><i className="fas fa-shopping-cart"></i></Button>
+                    <Button variant="outline-light" ><i className="fas fa-shopping-cart"></i><Badge bg="outline-light"> {this.props.cart.length} </Badge></Button>
                     <Dropdown style={{ marginLeft: '10px' }}>
                         <Dropdown.Toggle style={styles.button} id="dropdown-basic">
                             {this.props.username ? this.props.username: "Username"}
@@ -71,7 +72,8 @@ const styles = {
 
 const mapStateToProps = (state) =>{
     return{
-        username: state.userReducer.username
+        username: state.userReducer.username,
+        cart: state.userReducer.cart
     }
 }
 
