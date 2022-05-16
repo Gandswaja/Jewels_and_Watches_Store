@@ -13,7 +13,10 @@ class HomePage extends React.Component {
         super(props)
         this.state = {
             carousels: [],
-            products: []
+            products: [],
+            page: 1,
+            prodPerPage: 4,
+            maxPage: 0
         }
     }
 
@@ -23,21 +26,54 @@ class HomePage extends React.Component {
                 this.setState({ carousels: res.data })
                 Axios.get('http://localhost:2000/products')
                     .then(res => {
-                        this.setState({ products: res.data })
+                        this.setState({ products: res.data, maxPage: Math.ceil(res.data.length / this.state.prodPerPage)})
                     })
             })
     }
 
-    render() {
-        
+    onNextPage = () => {
+        this.setState({ page: this.state.page + 1 })
+    }
+
+    onPrevPage = () => {
+        this.setState({ page: this.state.page - 1 })
+    }
+
+    showProduct = () => {
+        let beginningIndex = (this.state.page - 1) * this.state.prodPerPage
+        let currentProduct = this.state.products.slice(beginningIndex, beginningIndex + this.state.prodPerPage)
+        console.log(currentProduct)
         return (
-            <div style={{ backgroundColor: '#A3DDCB', }}>
+            currentProduct.map((item, index) => {
+                return (
+                    <Card style={{ width: '18rem', marginTop: '15px', marginRight: '15px' }} key={index}>
+                        <Card.Img style={styles.cardImg} variant="top" src={item.images[0]} />
+                        <Card.Body style={styles.cardBody}>
+                            <Card.Title style={styles.cardTitle}>{item.name}</Card.Title>
+                            <Card.Text><strong>IDR {item.price.toLocaleString()},00</strong></Card.Text>
+                            <div style={styles.contButton}>
+                                <Button variant="outline-light">
+                                    <i className="far fa-bookmark"></i>
+                                </Button>
+                                <Button variant="outline-light" as={Link} to={`/detail?${item.id}`}>
+                                    <i className="fas fa-cart-plus"></i> Buy Now
+                                </Button>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                )
+            })
+        )
+    }
+    render() {
+        return (
+            <div style={{ backgroundColor: '#A3DDCB', paddingTop: '10vh' }}>
                 <NavigationBar />
-                <div style={styles.container}>
+                <div>
                     <Carousel style={styles.carousel}>
-                        {this.state.carousels.map(item => {
+                        {this.state.carousels.map((item, index) => {
                             return (
-                                <Carousel.Item>
+                                <Carousel.Item key={index}>
                                     <img
                                         className="d-block"
                                         src={item.image}
@@ -53,27 +89,17 @@ class HomePage extends React.Component {
                     </Carousel>
                     <div style={styles.sectProducts}>
                         <h1>Our Products</h1>
+                        <div style={{ display: 'flex', width: '205px', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Button onClick={this.onPrevPage} disabled={this.state.page == 1} style={{ backgroundColor: '#0A043C', border: 'none' }} >
+                                <i class="fas fa-chevron-double-left"></i>
+                            </Button>
+                            <p style={{ marginBottom: '0' }} >Page {this.state.page} of {this.state.maxPage}</p>
+                            <Button onClick={this.onNextPage} disabled={this.state.page == this.state.maxPage} style={{ backgroundColor: '#0A043C', border: 'none' }} >
+                                <i class="fas fa-chevron-double-right"></i>
+                            </Button>
+                        </div>
                         <div style={styles.contProducts}>
-                            {this.state.products.map(item => {
-                                console.log(item.name.length)
-                                return (
-                                    <Card style={{ width: '18rem', marginBottom: '15px', marginTop: '15px' }}>
-                                        <Card.Img style={styles.cardImg} variant="top" src={item.images[0]} />
-                                        <Card.Body style={styles.cardBody}>
-                                            <Card.Title style={styles.cardTitle}>{item.name}</Card.Title>
-                                            <Card.Text><strong>IDR {item.price.toLocaleString()},00</strong></Card.Text>
-                                            <div style={styles.contButton}>
-                                                <Button variant="outline-light">
-                                                    <i className="far fa-bookmark"></i>
-                                                </Button>
-                                                <Button variant="outline-light" as={Link} to={`/detail?${item.id}`}>
-                                                    <i className="fas fa-cart-plus"></i> Buy Now
-                                                </Button>
-                                            </div>
-                                        </Card.Body>
-                                    </Card>
-                                )
-                            })}
+                            {this.showProduct()}
                         </div>
                     </div>
                 </div>
@@ -97,7 +123,7 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                     <div>
-                        <h6 style={{ textAlign: 'center', margin: '0' }}>Copyright@Gandswaja</h6>
+                        <h6 style={{ textAlign: 'center', margin: '0' }}>Copyright@Franky777shg</h6>
                     </div>
                 </footer>
             </div>
@@ -106,10 +132,6 @@ class HomePage extends React.Component {
 }
 
 const styles = {
-    container: {
-        marginTop: '7vh',
-        paddingTop: '3vh'
-    },
     carousel: {
         height: '90vh',
         width: '90vw',
@@ -134,18 +156,17 @@ const styles = {
     },
     contProducts: {
         display: 'flex',
-        justifyContent: 'space-evenly',
         flexWrap: 'wrap',
         borderRadius: "10px"
     },
     cardImg: {
         padding: '15px',
-        width: '20vw',
-        height: '35vh'
+        height: '33vh',
+        width: '21vw'
     },
     cardBody: {
         backgroundColor: '#03506F',
-        borderRadius: '15px 15px 0 0',
+        borderRadius: '15px 15px 3px 3px',
         color: '#f8f9fa'
     },
     cardTitle: {

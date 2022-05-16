@@ -42,7 +42,7 @@ class LoginPage extends React.Component {
         }
 
         console.log(this.props.username)
-        const { visibility } = this.setState
+        const { visibility } = this.state
         return (
             <div style={styles.cont} >
                 <div style={styles.contForm} >

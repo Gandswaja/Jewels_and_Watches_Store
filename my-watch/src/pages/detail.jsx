@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { checkout } from '../redux/actions'
+import { addCart } from '../redux/actions'
 
 class DetailPage extends React.Component {
     constructor(props) {
@@ -23,7 +23,6 @@ class DetailPage extends React.Component {
 
     componentDidMount() {
         let idUrl = document.location.href.substring(29, 31)
-        // console.log(idUrl)
         Axios.get(`http://localhost:2000/products/${idUrl}`)
             .then(res => {
                 this.setState({ product: res.data })
@@ -49,6 +48,10 @@ class DetailPage extends React.Component {
 
     onPlus = () => {
         this.setState({ qty: this.state.qty + 1 })
+        if(this.props.role !== 'user'){
+            return alert('Silakan Login Dulu Bosque')
+        }
+        
     }
 
     onCheckout = () => {
@@ -66,30 +69,33 @@ class DetailPage extends React.Component {
             qty,
             stock: product.stock
         }
-        console.log(obj)
+        // console.log(obj)
 
-        this.props.checkout(this.props.id, obj)
+        this.props.addCart(this.props.id, obj)
 
         this.setState({ toCart: true })
     }
 
     render() {
         const { product, qty, toLogin, toCart } = this.state
-
         console.log(this.props.dataUser)
-
         if (toLogin) {
             return <Navigate to="/login" />
         } else if (toCart) {
             return <Navigate to="/cart" />
         }
-
         return (
             <div style={{ backgroundColor: '#A3DDCB', height: '110vh', paddingTop: '10vh' }}>
                 <NavigationBar />
                 <div style={styles.contTitle}>
                     <h1>Detail Page</h1>
-                    <Button variant="outline-dark" onClick={this.onCheckout}>Add to Cart</Button>
+                    {this.props.role === 'user'
+                        ?
+                        <Button variant="outline-dark" onClick={this.onCheckout}>Add to Cart</Button>
+                        :
+                        null
+                    }
+
                 </div>
                 <div style={{ display: 'flex', marginLeft: '1%', marginRight: '1%' }}>
                     <div style={styles.contImg}>
@@ -170,7 +176,8 @@ const mapStateToProps = (state) => {
     return {
         username: state.userReducer.username,
         id: state.userReducer.id,
-        dataUser: state.userReducer
+        dataUser: state.userReducer,
+        role: state.userReducer.role
     }
 }
-export default connect(mapStateToProps, { checkout })(DetailPage)
+export default connect(mapStateToProps, { addCart })(DetailPage)
