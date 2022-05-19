@@ -9,6 +9,7 @@ import {
 import { connect } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { addCart } from '../redux/actions'
+const api = 'https://deploydatabasewatch.herokuapp.com'
 
 class DetailPage extends React.Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class DetailPage extends React.Component {
 
     componentDidMount() {
         let idUrl = document.location.href.substring(29, 31)
-        Axios.get(`http://localhost:2000/products/${idUrl}`)
+        Axios.get(`${api}/products/${idUrl}`)
             .then(res => {
                 this.setState({ product: res.data })
             })

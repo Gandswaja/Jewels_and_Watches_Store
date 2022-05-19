@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import NavigationBar from '../component/navigationBar'
-
+const api = 'https://deploydatabasewatch.herokuapp.com'
 class HomePage extends React.Component {
     constructor(props) {
         super(props)
@@ -21,10 +21,10 @@ class HomePage extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:2000/slider')
+        Axios.get(`${api}/slider`)
             .then(res => {
                 this.setState({ carousels: res.data })
-                Axios.get('http://localhost:2000/products')
+                Axios.get(`${api}/products`)
                     .then(res => {
                         this.setState({ products: res.data, maxPage: Math.ceil(res.data.length / this.state.prodPerPage)})
                     })
@@ -123,7 +123,7 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                     <div>
-                        <h6 style={{ textAlign: 'center', margin: '0' }}>Copyright@Franky777shg</h6>
+                        <h6 style={{ textAlign: 'center', margin: '0' }}></h6>
                     </div>
                 </footer>
             </div>

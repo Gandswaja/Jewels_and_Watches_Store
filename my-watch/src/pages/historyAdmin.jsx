@@ -8,6 +8,7 @@ import {
     Image
 } from 'react-bootstrap'
 import { connect } from 'react-redux'
+const api = 'https://deploydatabasewatch.herokuapp.com'
 
 class HistoryAdmin extends React.Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class HistoryAdmin extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:2000/history')
+        Axios.get('${api}/history')
             .then(res => {
                 this.setState({ allHistory: res.data })
             })
