@@ -157,17 +157,21 @@ const styles = {
     contProducts: {
         display: 'flex',
         flexWrap: 'wrap',
-        borderRadius: "10px"
+        borderRadius: "10px",
+        
+
     },
     cardImg: {
         padding: '15px',
-        height: '33vh',
+        height: '47vh',
         width: '21vw'
+        
     },
     cardBody: {
         backgroundColor: '#03506F',
         borderRadius: '15px 15px 3px 3px',
-        color: '#f8f9fa'
+        color: '#f8f9fa',
+        padding: '2.5rem'
     },
     cardTitle: {
         overflow: 'hidden',

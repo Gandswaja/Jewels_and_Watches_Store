@@ -165,11 +165,11 @@ const styles = {
         padding: '0 1% 0 1%',
     },
     img: {
-        height: '70%',
-        width: '70%',
+        height: '50vh',
+        width: '20vw',
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop: '5%'
+        marginTop: '10%'
     },
 }
 
