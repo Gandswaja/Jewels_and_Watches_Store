@@ -26,7 +26,7 @@ class LoginPage extends React.Component{
         let password = this.refs.password.value
         // console.log(username, password)
 
-        // kalau ada input yang masih kosong, natofi data tidak boleh kosong
+        // kalau ada input yang masih kosong, kita notif bahwa data tidak boleh kosong
         if (!username || !password){
             return this.setState({error: true})
         }
